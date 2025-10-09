@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="PONG WARZ"
+run/main_scene="uid://v5w87bnwwlrm"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+config/tags=PackedStringArray("idea_pile")
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=720
+
+[global_group]
+
+tile=""

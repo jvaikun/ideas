@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://v5w87bnwwlrm"]
+
+[ext_resource type="Script" uid="uid://cosi1rt57lfy0" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c8xydmw1xh2af" path="res://ball.tscn" id="1_ig7tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(720, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(32, 720)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+position = Vector2(360, -16)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2(360, 736)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(-16, 360)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+position = Vector2(736, 360)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Ball" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(134, 203)
+
+[node name="Ball2" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(137, 519)
+
+[node name="Ball3" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(589, 218)
+
+[node name="Ball4" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(591, 526)
