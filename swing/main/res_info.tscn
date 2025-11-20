@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dor5u1jab7sth"]
+
+[ext_resource type="Script" uid="uid://cep8gdsqi6upo" path="res://main/res_info.gd" id="1_1uqc8"]
+[ext_resource type="FontFile" uid="uid://bebjs5itgysss" path="res://fonts/GermaniaOne-Regular.ttf" id="2_1uqc8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2gvho"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/ore.svg-c6adbe8387a538c61c42323a66fca914.ctex"
+
+[node name="ResInfo" type="HBoxContainer"]
+script = ExtResource("1_1uqc8")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_2gvho")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1uqc8")
+theme_override_font_sizes/font_size = 32
+text = "Ore Name"
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1uqc8")
+theme_override_font_sizes/font_size = 32
+text = "1"

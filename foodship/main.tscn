@@ -1,13 +1,13 @@
 [gd_scene load_steps=25 format=4 uid="uid://bqia6toull5gc"]
 
-[ext_resource type="Texture2D" uid="uid://vq5fj64qj813" path="res://foodship/Textures/colormap.png" id="1_di5qj"]
-[ext_resource type="Script" uid="uid://doyyoj44vr68f" path="res://foodship/main.gd" id="1_yxlik"]
-[ext_resource type="PackedScene" uid="uid://btifengeasbmp" path="res://foodship/buildings/building_1.tscn" id="3_sc3is"]
-[ext_resource type="PackedScene" uid="uid://bcdg4w73d4huv" path="res://foodship/buildings/building_2.tscn" id="4_m64u6"]
-[ext_resource type="PackedScene" uid="uid://uwut1nbqjgfv" path="res://foodship/buildings/building_3.tscn" id="5_8pcji"]
-[ext_resource type="PackedScene" uid="uid://chi08qcq1hg3b" path="res://foodship/buildings/building_4.tscn" id="6_bpveb"]
-[ext_resource type="PackedScene" uid="uid://caitn26hoxgf8" path="res://foodship/buildings/building_5.tscn" id="7_s770o"]
-[ext_resource type="PackedScene" uid="uid://cck6drwnv3abm" path="res://foodship/buildings/building_6.tscn" id="8_28qhj"]
+[ext_resource type="Texture2D" uid="uid://vq5fj64qj813" path="res://Textures/colormap.png" id="1_di5qj"]
+[ext_resource type="Script" uid="uid://doyyoj44vr68f" path="res://main.gd" id="1_yxlik"]
+[ext_resource type="PackedScene" uid="uid://btifengeasbmp" path="res://buildings/building_1.tscn" id="3_sc3is"]
+[ext_resource type="PackedScene" uid="uid://bcdg4w73d4huv" path="res://buildings/building_2.tscn" id="4_m64u6"]
+[ext_resource type="PackedScene" uid="uid://uwut1nbqjgfv" path="res://buildings/building_3.tscn" id="5_8pcji"]
+[ext_resource type="PackedScene" uid="uid://chi08qcq1hg3b" path="res://buildings/building_4.tscn" id="6_bpveb"]
+[ext_resource type="PackedScene" uid="uid://caitn26hoxgf8" path="res://buildings/building_5.tscn" id="7_s770o"]
+[ext_resource type="PackedScene" uid="uid://cck6drwnv3abm" path="res://buildings/building_6.tscn" id="8_28qhj"]
 
 [sub_resource type="Environment" id="Environment_i5flw"]
 fog_height = 20.0

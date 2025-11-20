@@ -1,0 +1,250 @@
+[gd_scene load_steps=12 format=3 uid="uid://dt8y335cdkwyd"]
+
+[ext_resource type="FontFile" uid="uid://dpqw7n5vymayu" path="res://fonts/MetalMania-Regular.ttf" id="1_crako"]
+[ext_resource type="Script" uid="uid://dm55adgp88uwp" path="res://title/title.gd" id="1_nx56k"]
+[ext_resource type="FontFile" uid="uid://bebjs5itgysss" path="res://fonts/GermaniaOne-Regular.ttf" id="2_nx56k"]
+[ext_resource type="Texture2D" uid="uid://5apjfap5s6dc" path="res://ui/border/panel-border-010.png" id="4_8xu2e"]
+[ext_resource type="Texture2D" uid="uid://vciubycd3lpn" path="res://ui/panel/panel-010.png" id="5_0tjwc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64gp6"]
+texture = ExtResource("4_8xu2e")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4bwyn"]
+texture = ExtResource("5_0tjwc")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_grl6k"]
+texture = ExtResource("4_8xu2e")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Animation" id="Animation_nx56k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleBlock/Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BtnStart:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_crako"]
+resource_name = "intro_slice"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleBlock/Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1800, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleBlock/Line2D:points")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(0, 480, 0, 480), PackedVector2Array(0, 480, 1440, 480)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleBlock/Line2D:width")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BtnStart:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s8lb"]
+_data = {
+&"RESET": SubResource("Animation_nx56k"),
+&"intro_slice": SubResource("Animation_crako")
+}
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nx56k")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="TitleBlock" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -55.000008
+offset_right = 85.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.17453292
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TitleBlock"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_crako")
+theme_override_font_sizes/font_size = 180
+text = "A Single Swing"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="TitleBlock"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="TitleBlock"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-491.9032, 297.9455, 1690.5702, 317.38626, 1704.5197, 652.9059, -469.9948, 678.69727, 111.09668, 460.11908)
+
+[node name="Line2D" type="Line2D" parent="TitleBlock"]
+points = PackedVector2Array(0, 480, 1440, 480)
+width = 0.0
+
+[node name="BtnStart" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+offset_left = -100.0
+offset_top = -43.0
+offset_right = 100.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_nx56k")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_64gp6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4bwyn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4bwyn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_grl6k")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4bwyn")
+text = "BEGIN!"
+
+[node name="Intro" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="Label" parent="Intro"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nx56k")
+theme_override_font_sizes/font_size = 32
+text = "The Destroyer has come"
+horizontal_alignment = 1
+
+[node name="Line2" type="Label" parent="Intro"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nx56k")
+theme_override_font_sizes/font_size = 32
+text = "The blade of prophecy forged"
+horizontal_alignment = 1
+
+[node name="Line3" type="Label" parent="Intro"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nx56k")
+theme_override_font_sizes/font_size = 32
+text = "A clash at the fated hour"
+horizontal_alignment = 1
+
+[node name="Line4" type="Label" parent="Intro"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nx56k")
+theme_override_font_sizes/font_size = 32
+text = "The fate of all, decided by. . ."
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6s8lb")
+}
+
+[connection signal="pressed" from="BtnStart" to="." method="_on_btn_start_pressed"]

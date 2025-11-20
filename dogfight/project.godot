@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Dogfighting"
+config/tags=PackedStringArray("idea_pile")
+run/main_scene="uid://bk8jjne1eqhr8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
-config/tags=PackedStringArray("idea_pile")

@@ -1,0 +1,220 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwpvx8tayevdc"]
+
+[ext_resource type="Script" uid="uid://d2txx103vni5r" path="res://main/main_game.gd" id="1_ixex6"]
+[ext_resource type="FontFile" uid="uid://bebjs5itgysss" path="res://fonts/GermaniaOne-Regular.ttf" id="2_1uyyn"]
+[ext_resource type="Texture2D" uid="uid://c8ipgvdl17lpi" path="res://ui/border/panel-border-000.png" id="3_5437h"]
+[ext_resource type="Texture2D" uid="uid://5apjfap5s6dc" path="res://ui/border/panel-border-010.png" id="4_ykneo"]
+[ext_resource type="Texture2D" uid="uid://vciubycd3lpn" path="res://ui/panel/panel-010.png" id="5_r4ock"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sqel3"]
+texture = ExtResource("3_5437h")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ykneo"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ex03x"]
+texture = ExtResource("4_ykneo")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yx71d"]
+texture = ExtResource("5_r4ock")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dpe3l"]
+texture = ExtResource("4_ykneo")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ixex6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Main" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Info" type="PanelContainer" parent="Main"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_sqel3")
+
+[node name="Content" type="VBoxContainer" parent="Main/Info"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+text = "Empowered with resources, the Fated Blade shall inflict damage upon the Destroyer according to the following axioms. . ."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_ykneo")
+
+[node name="Rules" type="RichTextLabel" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_1uyyn")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "I. [b]%d[/b] Dice of Fate shall be cast, each result added to the tally of damage.
+II. Should a Die yield a result lower than %d, it shall be cast anew %d times, the highest result added to the tally of damage.
+III. Should a Die yield a result higher than %d, it shall be cast anew %d times, each result added to the tally of damage.
+IV. For every Die cast, %d shall be added to the tally of damage.
+V. Thereafter, %d shall be added to the tally of damage.
+VI. Finally, the tally of damage shall be multiplied by %d."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_ykneo")
+
+[node name="Countdown" type="Label" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+text = "5 days remain before the arrival of the Destroyer."
+horizontal_alignment = 1
+
+[node name="BtnExpedition" type="Button" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex03x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dpe3l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_yx71d")
+text = "Seek Resources!"
+
+[node name="BtnNext" type="Button" parent="Main/Info/Content"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex03x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dpe3l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_yx71d")
+text = "Continue. . ."
+
+[node name="BtnBoss" type="Button" parent="Main/Info/Content"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex03x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dpe3l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_yx71d")
+text = "Face the Destroyer!"
+
+[node name="BtnRestart" type="Button" parent="Main/Info/Content"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex03x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dpe3l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_yx71d")
+text = "Restart"
+
+[node name="BtnQuit" type="Button" parent="Main/Info/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex03x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yx71d")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dpe3l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_yx71d")
+text = "Quit"
+
+[node name="Resources" type="PanelContainer" parent="Main"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sqel3")
+
+[node name="Content" type="VBoxContainer" parent="Main/Resources"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="Main/Resources/Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1uyyn")
+theme_override_font_sizes/font_size = 32
+text = "Resources Collected"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Main/Info/Content/BtnExpedition" to="." method="_on_btn_expedition_pressed"]
+[connection signal="pressed" from="Main/Info/Content/BtnNext" to="." method="_on_btn_next_pressed"]
+[connection signal="pressed" from="Main/Info/Content/BtnBoss" to="." method="_on_btn_boss_pressed"]
+[connection signal="pressed" from="Main/Info/Content/BtnRestart" to="." method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="Main/Info/Content/BtnQuit" to="." method="_on_btn_quit_pressed"]
