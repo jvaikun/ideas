@@ -3,8 +3,10 @@ extends Control
 var tween_anim : Tween
 
 func _ready() -> void:
+	$Buttons/VSeparator.visible = !(OS.get_name() == "Web")
+	$Buttons/BtnQuit.visible = !(OS.get_name() == "Web")
 	$Intro.show()
-	$BtnStart.modulate = Color.TRANSPARENT
+	$Buttons.modulate = Color.TRANSPARENT
 	for line in $Intro.get_children():
 		line.modulate = Color.TRANSPARENT
 	for line in $Intro.get_children():
@@ -22,3 +24,7 @@ func _ready() -> void:
 
 func _on_btn_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://main/main_game.tscn")
+
+
+func _on_btn_quit_pressed() -> void:
+	get_tree().quit()

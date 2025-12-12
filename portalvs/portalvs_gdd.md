@@ -20,11 +20,20 @@ Simply put, fantasy lunatics are killing all your guys for phat lewt. Kevin is n
 ## Gameplay
 Bullet heaven with base building and intel collection.
 Build compendium of knowledge by clearing runs, unlocking characters, etc.
+Gain resources by lasting longer during runs (player is distracting the murderhobos so the resource collectors can do their thing)
+Locate pieces of tech to boost your computing power
+Locate data cores of fellow Automata to unlock functional and cosmetic elements at HQ
+
+## Progression
+- Build a base of operations
+- Build a transmitter to phone home
+- Build a high bandwith quantum tunnel to evacuate Automata
+- Begin neutralization campaign to stop the Elasthran incursions
 
 ## Areas
 - The Iron Horde
 - The Valorous Assembly
-- 
+- Some kind of xianxia assholes
 
 ## Unlocks
 - Defeating X amount of enemies

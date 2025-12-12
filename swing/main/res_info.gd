@@ -14,10 +14,13 @@ const ORE_LIST = [
 var res_type : int = 0:
 	set(val):
 		res_type = clamp(val, 0, ORE_LIST.size()-1)
-		$Name.text = ORE_LIST[res_type][0]
-		$Icon.modulate = ORE_LIST[res_type][1]
+		_update_ui()
 
 var amount : int = 0:
 	set(val):
 		amount = max(0, val)
-		$Amount.text = str(amount)
+		_update_ui()
+
+func _update_ui():
+	$Name.text = "%d %s" % [amount, ORE_LIST[res_type][0]]
+	$Icon.modulate = ORE_LIST[res_type][1]
