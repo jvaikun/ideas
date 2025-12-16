@@ -7,6 +7,7 @@ const HP_MAX = 1000
 
 signal resources_collected
 
+@onready var dice_container = $Boss/Attacks/Damage/Dice
 @onready var prop_list = [
 	[$Main/Content/Rules/Rule1/Num1, Color.RED, "dice_amount"],
 	[$Main/Content/Rules/Rule2/Num2, Color.ORANGE, "fail_threshold"],
@@ -18,14 +19,14 @@ signal resources_collected
 	[$Main/Content/Rules/Rule6/Num8, Color.GRAY, "final_multiplier"],
 ]
 @onready var msg_list = [
-	[$Boss/Messages/Rule1/Num1, Color.RED, "dice_amount"],
-	[$Boss/Messages/Rule2/Num2, Color.ORANGE, "fail_threshold"],
-	[$Boss/Messages/Rule2/Num3, Color.YELLOW, "fail_reroll_limit"],
-	[$Boss/Messages/Rule3/Num4, Color.GREEN, "crit_threshold"],
-	[$Boss/Messages/Rule3/Num5, Color.BLUE, "crit_reroll_limit"],
-	[$Boss/Messages/Rule4/Num6, Color.INDIGO, "per_die_modifier"],
-	[$Boss/Messages/Rule5/Num7, Color.VIOLET, "final_modifier"],
-	[$Boss/Messages/Rule6/Num8, Color.GRAY, "final_multiplier"],
+	[$Boss/Attacks/Messages/Rule1/Num1, Color.RED, "dice_amount"],
+	[$Boss/Attacks/Messages/Rule2/Num2, Color.ORANGE, "fail_threshold"],
+	[$Boss/Attacks/Messages/Rule2/Num3, Color.YELLOW, "fail_reroll_limit"],
+	[$Boss/Attacks/Messages/Rule3/Num4, Color.GREEN, "crit_threshold"],
+	[$Boss/Attacks/Messages/Rule3/Num5, Color.BLUE, "crit_reroll_limit"],
+	[$Boss/Attacks/Messages/Rule4/Num6, Color.INDIGO, "per_die_modifier"],
+	[$Boss/Attacks/Messages/Rule5/Num7, Color.VIOLET, "final_modifier"],
+	[$Boss/Attacks/Messages/Rule6/Num8, Color.GRAY, "final_multiplier"],
 ]
 
 # Sword params
@@ -51,7 +52,7 @@ func _ready() -> void:
 	resources.clear()
 	resource_info_list.clear()
 	$Boss.modulate = Color.TRANSPARENT
-	$Boss/Messages/Result.modulate = Color.TRANSPARENT
+	$Boss/Attacks/Messages/Result.modulate = Color.TRANSPARENT
 	$Boss.hide()
 	$Main.modulate = Color.WHITE
 	$Main.show()
@@ -76,11 +77,11 @@ func _update_rules():
 func _change_message(index):
 	var tween_change = create_tween()
 	tween_change.parallel()
-	for i in $Boss/Messages.get_child_count():
+	for i in $Boss/Attacks/Messages.get_child_count():
 		if i == index:
-			tween_change.tween_property($Boss/Messages.get_child(i), "modulate", Color.WHITE, 0.1)
+			tween_change.tween_property($Boss/Attacks/Messages.get_child(i), "modulate", Color.WHITE, 0.1)
 		else:
-			tween_change.tween_property($Boss/Messages.get_child(i), "modulate", Color.TRANSPARENT, 0.1)
+			tween_change.tween_property($Boss/Attacks/Messages.get_child(i), "modulate", Color.TRANSPARENT, 0.1)
 	tween_change.play()
 
 
@@ -174,6 +175,8 @@ func _on_btn_continue_pressed() -> void:
 # Based on damage amount, zoom out to magical explosion of increasing scale 
 func _on_btn_boss_pressed() -> void:
 	_update_rules()
+	$Boss/Buttons/BtnRestart.hide()
+	$Boss/Buttons/BtnQuit.hide()
 	$Boss/Buttons/BtnNext.hide()
 	$Boss.show()
 	var tween_fade = create_tween()
@@ -188,21 +191,24 @@ func _on_btn_boss_pressed() -> void:
 	var crit_reroll_count = 0
 	var fail_reroll_count = 0
 	var damage_amount = 0
+	$Boss/Buttons/BtnNext.show()
+	await $Boss/Buttons/BtnNext.pressed
+	$Boss/Buttons/BtnNext.hide()
 	# Roll (dice_amount) d6.
 	for i in dice_amount:
 		dice_rolls.append(randi_range(1,6))
 		var dice_inst = DICE_OBJ.instantiate()
-		$Boss/Dice.add_child(dice_inst)
+		dice_container.add_child(dice_inst)
 		dice_inst.text = str(dice_rolls[-1])
 		if dice_rolls[-1] <= fail_threshold:
 			fail_indices.append(i)
 		elif dice_rolls[-1] > crit_threshold:
 			crit_indices.append(i)
 		await get_tree().create_timer(0.1).timeout
+	_change_message(1)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
-	_change_message(1)
 	# Re-roll any (fail_threshold)s or below and keep the higher number (fail_reroll_limit) times.
 	for index in fail_indices:
 		fail_reroll_count = 0
@@ -210,45 +216,51 @@ func _on_btn_boss_pressed() -> void:
 			var new_roll = randi_range(1, 6)
 			dice_rolls[index] = max(new_roll, dice_rolls[index])
 			fail_reroll_count += 1
-		$Boss/Dice.get_child(index).text = str(dice_rolls[index])
+		dice_container.get_child(index).text = str(dice_rolls[index])
 		await get_tree().create_timer(0.1).timeout
+	_change_message(2)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
-	_change_message(2)
 	# Re-roll any (crit_threshold)s or above and sum the numbers (crit_reroll_limit) times.
 	for index in crit_indices:
 		crit_reroll_count = 0
 		while crit_reroll_count < crit_reroll_limit:
 			dice_rolls[index] += randi_range(1, 6)
 			crit_reroll_count += 1
-		$Boss/Dice.get_child(index).text = str(dice_rolls[index])
+		dice_container.get_child(index).text = str(dice_rolls[index])
 		await get_tree().create_timer(0.1).timeout
+	_change_message(3)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
-	_change_message(3)
 	# Add (per_die_bonus) for every die used.
 	for i in dice_amount:
 		dice_rolls[i] += per_die_modifier
 		damage_amount += dice_rolls[i]
-		$Boss/Dice.get_child(i).text = str(dice_rolls[i])
+		dice_container.get_child(i).text = str(dice_rolls[i])
 		await get_tree().create_timer(0.1).timeout
+	var tween_merge = create_tween()
+	tween_merge.tween_property(dice_container, "theme_override_constants/separation", -64, 1.0)
+	tween_merge.play()
+	await tween_merge.finished
+	dice_container.hide()
+	$Boss/Attacks/Damage/Total.text = str(damage_amount)
+	$Boss/Attacks/Damage/Total.show()
+	_change_message(4)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
-	_change_message(4)
 	# Add a final modifier of (final_modifier).
 	damage_amount += final_modifier
+	$Boss/Attacks/Damage/Total.text = str(damage_amount)
+	_change_message(5)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
-	_change_message(5)
 	# Multiply the total by (final_multiplier) to get your final damage.
 	damage_amount *= final_multiplier
-	$Boss/Buttons/BtnNext.show()
-	await $Boss/Buttons/BtnNext.pressed
-	$Boss/Buttons/BtnNext.hide()
+	$Boss/Attacks/Damage/Total.text = str(damage_amount)
 	boss_hp -= damage_amount
 	var tween_damage = create_tween()
 	tween_damage.tween_property($Boss/Info/BossHP, "value", boss_hp, 1.0)
@@ -259,8 +271,10 @@ func _on_btn_boss_pressed() -> void:
 		final_result += "The fateful strike fells the Destroyer! The land is saved!"
 	else:
 		final_result += "The fateful strike fails to slay the Destroyer! The land is doomed!"
-	$Boss/Messages/Result.text = final_result
+	$Boss/Attacks/Messages/Result.text = final_result
 	_change_message(6)
+	$Boss/Buttons/BtnRestart.show()
+	$Boss/Buttons/BtnQuit.show()
 
 
 func _on_btn_restart_pressed() -> void:
