@@ -79,6 +79,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Boss" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -434,7 +435,6 @@ text = "Final Result"
 horizontal_alignment = 1
 
 [node name="Main" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

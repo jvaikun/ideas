@@ -186,8 +186,6 @@ func _on_btn_boss_pressed() -> void:
 	await tween_fade.finished
 	$Main.hide()
 	var dice_rolls = []
-	var crit_indices = []
-	var fail_indices = []
 	var crit_reroll_count = 0
 	var fail_reroll_count = 0
 	var damage_amount = 0
@@ -200,36 +198,34 @@ func _on_btn_boss_pressed() -> void:
 		var dice_inst = DICE_OBJ.instantiate()
 		dice_container.add_child(dice_inst)
 		dice_inst.text = str(dice_rolls[-1])
-		if dice_rolls[-1] <= fail_threshold:
-			fail_indices.append(i)
-		elif dice_rolls[-1] > crit_threshold:
-			crit_indices.append(i)
 		await get_tree().create_timer(0.1).timeout
 	_change_message(1)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
 	# Re-roll any (fail_threshold)s or below and keep the higher number (fail_reroll_limit) times.
-	for index in fail_indices:
-		fail_reroll_count = 0
-		while fail_reroll_count < fail_reroll_limit:
-			var new_roll = randi_range(1, 6)
-			dice_rolls[index] = max(new_roll, dice_rolls[index])
-			fail_reroll_count += 1
-		dice_container.get_child(index).text = str(dice_rolls[index])
-		await get_tree().create_timer(0.1).timeout
+	for i in dice_amount:
+		if dice_rolls[i] <= fail_threshold:
+			fail_reroll_count = 0
+			while fail_reroll_count < fail_reroll_limit:
+				var new_roll = randi_range(1, 6)
+				dice_rolls[i] = max(new_roll, dice_rolls[i])
+				fail_reroll_count += 1
+			dice_container.get_child(i).text = str(dice_rolls[i])
+			await get_tree().create_timer(0.1).timeout
 	_change_message(2)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
 	$Boss/Buttons/BtnNext.hide()
 	# Re-roll any (crit_threshold)s or above and sum the numbers (crit_reroll_limit) times.
-	for index in crit_indices:
-		crit_reroll_count = 0
-		while crit_reroll_count < crit_reroll_limit:
-			dice_rolls[index] += randi_range(1, 6)
-			crit_reroll_count += 1
-		dice_container.get_child(index).text = str(dice_rolls[index])
-		await get_tree().create_timer(0.1).timeout
+	for i in dice_amount:
+		if dice_rolls[i] >= crit_threshold:
+			crit_reroll_count = 0
+			while crit_reroll_count < crit_reroll_limit:
+				dice_rolls[i] += randi_range(1, 6)
+				crit_reroll_count += 1
+			dice_container.get_child(i).text = str(dice_rolls[i])
+			await get_tree().create_timer(0.1).timeout
 	_change_message(3)
 	$Boss/Buttons/BtnNext.show()
 	await $Boss/Buttons/BtnNext.pressed
